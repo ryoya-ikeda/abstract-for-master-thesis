@@ -1,3 +1,5 @@
+.DS_Store
+
 # tex
 *.aux
 *.dvi
@@ -9,3 +11,4 @@
 *.bbl
 *.out
 *.fdb_latexmk
+*.blg
