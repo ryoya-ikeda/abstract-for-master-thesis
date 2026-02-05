@@ -1,0 +1,139 @@
+% パッケージの読み込み=====================================================================
+\usepackage{fancyhdr} % ヘッダーフッターの設定
+\usepackage{comment} % 複数行コメント
+\usepackage{multicol} %段組
+\usepackage{xytree} % 階層構造図
+\usepackage{otf}    % 囲み数字など
+\usepackage{ascmac}    % 枠囲みなど
+\usepackage{pxrubrica} % ふりがな
+\usepackage{titlesec} % 章見出しのサイズを変更
+%url表示の不具合を解消
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{breakurl}
+
+\usepackage{color} % 文字の網掛け \colorbox[rgb]{0.8, 1.0, 1.0}{contents}
+\usepackage{colortbl}
+
+
+% プログレスバーを表示したい(ネタ) ==========
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{calc}
+\usepackage{kvsetkeys}
+\usepackage{kvoptions}
+\usepackage{tikz}
+\usepackage{progressbar}
+% プログレスバーを表示したい(ネタ) ==========
+
+% 表で破線を書きたい
+\usepackage{array} 
+\usepackage{arydshln} 
+
+
+% 引用文献の示し方の設定
+\usepackage{natbib}
+\bibpunct[:]{(}{)}{,}{a}{}{,}
+
+
+% 上下余白設定
+\usepackage[truedimen, margin=30truemm]{geometry}
+
+% タイトルの設定 =======================================================================
+\date{} % 日付は、ヘッダーにつけるので、タイトルから除外する
+
+
+
+% ヘッダー&フッダーの設定 ================================================================
+\newcommand{\nomalpage}{
+\pagestyle{fancy}
+	\lhead{\LectureName \\ \DocumentCategory}
+    \chead{} %ヘッダ中央 ; 何もつけない
+    \rhead{\LectureDay \\ \MyName} %ヘッダ右．コンパイルした日付を表示
+    \lfoot{} %フッタ左 ; 何もつけない
+    \cfoot{\thepage} %フッタ中央．ページ番号を表示
+    \rfoot{} %フッタ右 ; 何もつけない
+}
+\renewcommand{\headrulewidth}{0pt} %ヘッダの罫線を消す
+
+% 1ページ目用のスタイルを定義(名前を表示しない)
+\newcommand{\firstpage}{
+\thispagestyle{fancy}
+	\lhead{\LectureName \\ \DocumentCategory}
+    \chead{} %ヘッダ中央 ; 何もつけない
+    \rhead{\LectureDay \\ } %ヘッダ右．コンパイルした日付を表示
+    \lfoot{} %フッタ左 ; 何もつけない
+    \cfoot{\thepage} %フッタ中央．ページ番号を表示
+    \rfoot{} %フッタ右 ; 何もつけない
+}
+
+
+\titleformat{\section} % \sectionを変更する
+    [hang] % 形状はhang（デフォルト値）
+    {\sffamily\large} % 見出し自体のスタイルをサンセリフ体、フォントサイズを\normalsizeとする
+    {\textsf{\thesection}} % ラベルをサンセリフ体
+    {0.5zw} % ラベルと見出しとの間に0.5zwの空白を入れる
+    {} % 見出し文字列の前に何も入れない
+    [] % 後ろには何も入れない
+\titlespacing{\section}
+    {0pt} % 左に0pt
+    {1.5pt} % 前に0.25pt
+    {0.5pt} % 後ろに0.25pt
+        
+\titleformat{\subsection} % \sectionを変更する
+    [hang] % 形状はhang（デフォルト値）
+    {\sffamily\normalsize} % 見出し自体のスタイルをサンセリフ体、フォントサイズを\normalsizeとする
+    {\textsf{\thesubsection}} % ラベルをサンセリフ体
+    {0.5zw} % ラベルと見出しとの間に0.5zwの空白を入れる
+    {} % 見出し文字列の前に何も入れない
+    [] % 後ろには何も入れない
+    
+\titlespacing{\subsection}
+    {0pt} % 左に0pt
+    {0.2pt} % 前に0.25pt
+    {0pt} % 後ろに0.25pt
+
+
+% ゼミ発表資料用・章番号================================
+
+
+% 外側（章）のカウンター定義
+\usepackage{enumitem} %enumerateのカスタマイズ
+
+\newlist{chapenum}{enumerate}{1}
+\setlist[chapenum,1]{
+  label=\textbf{第\arabic*章},
+  ref=\arabic*,
+  leftmargin=2cm
+}
+
+% 内側（節）のカウンター定義
+\newlist{sectenum}{enumerate}{2}
+\setlist[sectenum,1]{
+  label*=\arabic*節,
+  leftmargin=0.5cm
+}
+
+
+% キーワード表示用のマクロを定義
+\newcommand{\keywords}[1]{%
+  \begin{center}
+    \vspace{1em}
+    \noindent\textbf{Keywords:} #1
+  \end{center}
+}
+
+% 表の結合
+\usepackage{multirow}
+\newcommand{\kaigyo}[2]{\begin{tabular}{#1} #2\end{tabular}}
+\newcommand{\mulc}[3]{\multicolumn{#1}{#2}{#3}}
+\newcommand{\mulr}[2]{\multirow{#1}{*}{#2}}
+\newcommand{\mulcr}[4]{\multicolumn{#1}{#2}{\multirow{#3}{*}{#4}}}
+
+%読み上げを省略する部分、 網掛けの定義(ただし、1行又は1段落一括のどちらか、途中改行には対応していない)
+\newcommand{\amikakehbox}[1]{\noindent\hspace{-2.5mm}
+\colorbox{lightgray}{\vbox{\hsize 85mm #1}} }
+\newcommand{\amikakebox}[1]{\noindent\hspace{-2.5mm}
+\colorbox{lightgray}{\vbox{\hsize 177mm #1}} }
+\newcommand{\amikakeline}[1]{\colorbox{lightgray}{#1} }
+\newcommand{\aml}[1]{\colorbox{lightgray}{#1} }
+\newcommand{\amw}[1]{\colorbox{wight}{#1} }
